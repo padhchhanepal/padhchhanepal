@@ -1,5 +1,5 @@
 
-import { Book, MapPin, Edit, Trash2 } from "lucide-react";
+import { Book, MapPin, Edit, Trash2, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Sample data for demonstration
