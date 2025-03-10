@@ -46,6 +46,7 @@ const App = () => {
             <Route path="/book/:id" element={<BookDetail />} />
             <Route path="/account" element={<UserAccount />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/secondhand" element={<Admin />} /> {/* Temporary route, will create a dedicated page later */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
