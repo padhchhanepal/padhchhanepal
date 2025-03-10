@@ -7,10 +7,12 @@ import { SecondaryBookForm } from "@/components/admin/SecondaryBookForm";
 import { SecondaryBooksList } from "@/components/admin/SecondaryBooksList";
 import { SearchBar } from "@/components/ui/search-bar";
 import { PopularBooksList } from "@/components/admin/PopularBooksList";
+import { Book, ShoppingBag } from "lucide-react";
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [searchQuery, setSearchQuery] = useState("");
+  const [bookType, setBookType] = useState<"all" | "new" | "secondhand">("all");
   
   // Scroll to top when component mounts
   useEffect(() => {
@@ -53,7 +55,46 @@ const Admin = () => {
                 )}
               </div>
               
-              <PopularBooksList />
+              <div className="p-6 bg-white dark:bg-gray-800/30 rounded-lg border border-border shadow-sm mb-4">
+                <h2 className="text-xl font-semibold mb-4">Book Type Filter</h2>
+                <div className="flex space-x-2">
+                  <button 
+                    onClick={() => setBookType("all")}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+                      bookType === "all" 
+                        ? "bg-book-primary text-white" 
+                        : "bg-muted hover:bg-muted/80"
+                    }`}
+                  >
+                    <ShoppingBag className="h-4 w-4" />
+                    All Books
+                  </button>
+                  <button 
+                    onClick={() => setBookType("new")}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+                      bookType === "new" 
+                        ? "bg-book-primary text-white" 
+                        : "bg-muted hover:bg-muted/80"
+                    }`}
+                  >
+                    <Book className="h-4 w-4" />
+                    New Books
+                  </button>
+                  <button 
+                    onClick={() => setBookType("secondhand")}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+                      bookType === "secondhand" 
+                        ? "bg-book-primary text-white" 
+                        : "bg-muted hover:bg-muted/80"
+                    }`}
+                  >
+                    <Book className="h-4 w-4" />
+                    Secondhand Books
+                  </button>
+                </div>
+              </div>
+              
+              <PopularBooksList bookType={bookType} />
             </TabsContent>
             
             <TabsContent value="secondary" className="space-y-8">
