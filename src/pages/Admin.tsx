@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -16,9 +15,9 @@ const Admin = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [searchQuery, setSearchQuery] = useState("");
   const [bookType, setBookType] = useState<"all" | "new" | "secondhand">("all");
+  const [refreshKey, setRefreshKey] = useState(0);
   const { toast } = useToast();
   
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -26,16 +25,28 @@ const Admin = () => {
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     console.log("Searching for:", query);
-    // In a real app, this would trigger an API call to search books
   };
   
-  const handleNewBookAdded = () => {
+  const handleBookAction = (action: 'added' | 'updated' | 'deleted') => {
+    let message = "";
+    switch(action) {
+      case 'added':
+        message = "The new book has been added to your catalog.";
+        break;
+      case 'updated':
+        message = "The book has been updated in your catalog.";
+        break;
+      case 'deleted':
+        message = "The book has been removed from your catalog.";
+        break;
+    }
+    
     toast({
       title: "Book Catalog Updated",
-      description: "The new book has been added to your catalog.",
+      description: message,
     });
     
-    // In a real app, this would refresh the book list from the API
+    setRefreshKey(prev => prev + 1);
     setActiveTab("dashboard");
   };
 
@@ -167,7 +178,7 @@ const Admin = () => {
             <TabsContent value="new-books" className="space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-1">
-                  <NewBookForm onSuccess={handleNewBookAdded} />
+                  <NewBookForm onSuccess={() => handleBookAction('added')} />
                 </div>
                 <div className="lg:col-span-2">
                   <div className="p-6 bg-white dark:bg-gray-800/30 rounded-lg border border-border shadow-sm">
@@ -190,7 +201,7 @@ const Admin = () => {
               </div>
             </TabsContent>
             
-            <TabsContent value="secondary" className="space-y-8">
+            <TabsContent value="secondary" className="space-y-8" key={`secondary-tab-${refreshKey}`}>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-1">
                   <SecondaryBookForm />

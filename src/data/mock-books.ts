@@ -1,3 +1,4 @@
+
 import { BookData } from "@/components/ui/book-card";
 
 export const mockBooks: BookData[] = [
@@ -60,6 +61,27 @@ export const mockBooks: BookData[] = [
     originalPrice: 400,
     language: "nepali",
     isNew: true
+  },
+  // Adding some secondhand books for testing
+  {
+    id: "7",
+    title: "Old Classic Novel",
+    author: "Mohan Koirala",
+    cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794",
+    price: 200,
+    originalPrice: 350,
+    language: "nepali",
+    isNew: false
+  },
+  {
+    id: "8",
+    title: "Vintage Poetry Collection",
+    author: "Laxmi Prasad Devkota",
+    cover: "https://images.unsplash.com/photo-1520013817300-1f4c1cb245ef",
+    price: 175,
+    originalPrice: 250,
+    language: "nepali",
+    isNew: false
   }
 ];
 
