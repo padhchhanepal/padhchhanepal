@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Heart } from "lucide-react";
@@ -63,26 +62,24 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
       <div
         className={cn(
           "overflow-hidden bg-book-secondary/30",
-          featured ? "md:w-1/3 aspect-[3/4]" : "aspect-[3/4] w-full"
+          featured ? "md:w-1/3 aspect-[3/4]" : "w-full aspect-[2/3] max-h-[300px]"
         )}
       >
-        <Link to={`/book/${book.id}`}>
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-              <div className="w-10 h-10 rounded-full border-2 border-book-primary/50 border-t-transparent animate-spin" />
-            </div>
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full border-2 border-book-primary/50 border-t-transparent animate-spin" />
+          </div>
+        )}
+        <img
+          src={book.cover}
+          alt={book.title}
+          onLoad={() => setImageLoaded(true)}
+          className={cn(
+            "w-full h-full object-cover transition-all duration-700",
+            "group-hover:scale-105 group-hover:rotate-1",
+            imageLoaded ? "opacity-100" : "opacity-0"
           )}
-          <img
-            src={book.cover}
-            alt={book.title}
-            onLoad={() => setImageLoaded(true)}
-            className={cn(
-              "w-full h-full object-cover transition-all duration-700",
-              "group-hover:scale-105 group-hover:rotate-1",
-              imageLoaded ? "opacity-100" : "opacity-0"
-            )}
-          />
-        </Link>
+        />
       </div>
 
       {/* Content */}

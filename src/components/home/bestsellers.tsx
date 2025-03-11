@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { BookCard, BookData } from "@/components/ui/book-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { mockBooks } from "@/data/mock-books";
 
 export function Bestsellers() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,49 +26,8 @@ export function Bestsellers() {
     return () => observer.disconnect();
   }, []);
 
-  // Sample book data (would come from API in real app)
-  const bestsellers: BookData[] = [
-    {
-      id: "1",
-      title: "The Alchemist",
-      author: "Paulo Coelho",
-      cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      price: 450,
-      originalPrice: 700,
-      language: "english",
-      isNew: true
-    },
-    {
-      id: "2",
-      title: "Seto Dharati",
-      author: "Amar Neupane",
-      cover: "https://images.unsplash.com/photo-1629992101753-56d196c8aabb",
-      price: 425,
-      originalPrice: 500,
-      language: "nepali",
-      isNew: false
-    },
-    {
-      id: "3",
-      title: "Atomic Habits",
-      author: "James Clear",
-      cover: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e",
-      price: 650,
-      originalPrice: 1000,
-      language: "english",
-      isNew: true
-    },
-    {
-      id: "4",
-      title: "Palpasa Café",
-      author: "Narayan Wagle",
-      cover: "https://images.unsplash.com/photo-1541963463532-d68292c34b19",
-      price: 340,
-      originalPrice: 400,
-      language: "nepali",
-      isNew: false
-    }
-  ];
+  // Get only the first 10 books from mock data
+  const bestsellers = mockBooks.slice(0, 10);
 
   return (
     <section 
@@ -111,7 +70,7 @@ export function Bestsellers() {
         </Button>
       </div>
 
-      <div className="book-grid">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {bestsellers.map((book, index) => (
           <div
             key={book.id}

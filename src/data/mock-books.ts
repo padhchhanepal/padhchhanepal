@@ -1,4 +1,3 @@
-
 import { BookData } from "@/components/ui/book-card";
 
 export const mockBooks: BookData[] = [
@@ -64,7 +63,6 @@ export const mockBooks: BookData[] = [
   }
 ];
 
-// Function to add a new book to the collection
 export const addBook = (book: Omit<BookData, "id">): BookData => {
   const newBook: BookData = {
     ...book,
@@ -75,8 +73,14 @@ export const addBook = (book: Omit<BookData, "id">): BookData => {
   return newBook;
 };
 
-// Function to get books by type
 export const getBooksByType = (type: "all" | "new" | "secondhand"): BookData[] => {
   if (type === "all") return mockBooks;
   return mockBooks.filter(book => type === "new" ? book.isNew : !book.isNew);
+};
+
+export const deleteBook = (id: string): void => {
+  const index = mockBooks.findIndex(book => book.id === id);
+  if (index !== -1) {
+    mockBooks.splice(index, 1);
+  }
 };
