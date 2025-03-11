@@ -17,17 +17,17 @@ export function Logo({
   const sizes = {
     sm: "h-6",
     md: "h-8",
-    lg: "h-10",
+    lg: "h-12", // Increased size
   };
 
   const textSizes = {
     sm: "text-sm",
     md: "text-lg",
-    lg: "text-xl",
+    lg: "text-2xl", // Increased text size
   };
 
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <div className={cn("flex items-center gap-3", className)}>
       <div className={cn("relative", sizes[size])}>
         <svg
           className={cn("h-full w-auto", sizes[size])}
@@ -56,7 +56,7 @@ export function Logo({
       {showText && (
         <span
           className={cn(
-            "font-display font-semibold tracking-tight text-foreground",
+            "font-display font-bold tracking-tight text-foreground",
             textSizes[size],
             textClassName
           )}

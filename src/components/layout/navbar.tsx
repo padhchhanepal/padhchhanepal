@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -19,7 +18,6 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   
-  // Check if user is on homepage to adjust navbar transparency
   const isHomepage = location.pathname === "/";
 
   useEffect(() => {
@@ -35,7 +33,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when changing routes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
@@ -82,10 +79,8 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Logo */}
-        <Logo className="z-20" />
+        <Logo className="z-20" size="lg" />
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1">
           {navItems.map((item) => (
             <NavLink key={item.href} href={item.href}>
@@ -94,7 +89,6 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-4">
           <SearchBar className="mr-4" />
           
@@ -120,7 +114,6 @@ export function Navbar() {
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden p-2 rounded-full text-muted-foreground hover:bg-book-secondary/50 transition-colors duration-300 z-20"
@@ -129,7 +122,6 @@ export function Navbar() {
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
 
-        {/* Mobile Menu */}
         <div
           className={cn(
             "fixed inset-0 z-10 bg-white dark:bg-black flex flex-col p-6 pt-20 transition-all duration-500 ease-in-out",

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
@@ -64,7 +63,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
           >
-            Nepal's Premier Online Bookstore
+            Padhchha Nepal, taba na aghi badhchha Nepal
           </div>
 
           {/* Heading */}
@@ -75,24 +74,12 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
           >
-            Discover Your Next
+            Welcome to
             <span className="relative">
-              <span className="relative z-10 text-book-primary"> Favorite Book</span>
+              <span className="relative z-10 text-book-primary"> Padhchha Nepal</span>
               <span className="absolute bottom-0 left-0 right-0 h-4 bg-book-secondary/50 -z-0" style={{ bottom: '0.125em' }}></span>
             </span>
           </h1>
-
-          {/* Description */}
-          <p 
-            className={cn(
-              "text-lg text-muted-foreground max-w-xl mb-8",
-              "transform transition-all duration-700 ease-out delay-200",
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            )}
-          >
-            From bestsellers to rare finds, explore our vast collection of books
-            across all genres. Shop English and Nepali books with exclusive discounts!
-          </p>
 
           {/* Search Bar */}
           <div
@@ -108,7 +95,7 @@ export function HeroSection() {
           {/* Categories */}
           <div 
             className={cn(
-              "flex flex-wrap gap-2 mb-8",
+              "flex flex-wrap gap-3 mb-8",
               "transform transition-all duration-700 ease-out delay-400",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
@@ -119,6 +106,7 @@ export function HeroSection() {
                 label={category}
                 active={activeCategory === category}
                 onClick={() => setActiveCategory(category)}
+                className="text-base px-4 py-2"
               />
             ))}
           </div>
