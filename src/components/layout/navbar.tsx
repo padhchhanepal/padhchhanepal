@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -43,6 +44,7 @@ export function Navbar() {
     { title: "Secondhand", href: "/secondhand" },
     { title: "E-books", href: "/ebooks" },
     { title: "Audiobooks", href: "/audiobooks" },
+    { title: "Poetry Sessions", href: "/poetry" }, // Added Poetry Sessions next to Audiobooks
   ];
 
   const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {

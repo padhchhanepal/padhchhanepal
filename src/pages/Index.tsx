@@ -30,9 +30,9 @@ function Index() {
         
         <main className="flex-1">
           <HeroSection />
+          <PoetrySessions /> {/* Moved PoetrySessions to the top */}
           <Bestsellers />
           <BooksByCategory />
-          <PoetrySessions />
           <FeaturedReviews />
         </main>
         
