@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { mockBooks } from "@/data/mock-books";
+import { CategoryChip } from "@/components/ui/category-chip";
 
 interface CategoryBook {
   categoryName: string;
@@ -14,8 +15,27 @@ interface CategoryBook {
 
 export function BooksByCategory() {
   const [categories, setCategories] = useState<CategoryBook[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>("All");
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+
+  // Define all available categories
+  const bookCategories = [
+    "All",
+    "Biography",
+    "Autobiography", 
+    "Fiction",
+    "Non-Fiction",
+    "Love Story",
+    "Story",
+    "History",
+    "Religious",
+    "Poetry",
+    "Essays",
+    "Drama",
+    "Philosophy",
+    "Spiritual"
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,15 +58,37 @@ export function BooksByCategory() {
     // Simulate API call to get books by category
     setIsLoading(true);
     setTimeout(() => {
-      // For demonstration, we'll create categories based on language
-      const englishBooks = mockBooks.filter(book => book.language === "english").slice(0, 5);
-      const nepaliBooks = mockBooks.filter(book => book.language === "nepali").slice(0, 5);
+      // For demonstration, we'll assign random categories to the mock books
+      // In a real app, you would fetch properly categorized books from an API
+      const categorizedBooks: Record<string, BookData[]> = {
+        "Biography": [],
+        "Fiction": [],
+        "Non-Fiction": [],
+        "Love Story": [],
+        "Story": []
+      };
       
-      setCategories([
-        { categoryName: "English Books", books: englishBooks },
-        { categoryName: "Nepali Books", books: nepaliBooks }
-      ]);
+      // Assign books to categories (a book can be in multiple categories)
+      mockBooks.forEach(book => {
+        // Randomly assign each book to 1-3 categories for demo purposes
+        const assignedCategories = Object.keys(categorizedBooks)
+          .sort(() => 0.5 - Math.random())
+          .slice(0, Math.floor(Math.random() * 3) + 1);
+        
+        assignedCategories.forEach(category => {
+          if (categorizedBooks[category].length < 5) { // Limit to 5 books per category
+            categorizedBooks[category].push({...book});
+          }
+        });
+      });
       
+      // Convert to array format for state
+      const categoriesArray = Object.entries(categorizedBooks).map(([categoryName, books]) => ({
+        categoryName,
+        books: books.slice(0, 5) // Ensure max 5 books per category
+      }));
+      
+      setCategories(categoriesArray);
       setIsLoading(false);
     }, 500);
   }, []);
@@ -77,9 +119,27 @@ export function BooksByCategory() {
           </p>
         </div>
         
+        {/* Category filter chips */}
+        <div 
+          className={cn(
+            "flex flex-wrap gap-2 mb-8",
+            isVisible ? "animate-slide-in-from-left" : "opacity-0"
+          )}
+          style={{ animationDelay: "150ms" }}
+        >
+          {bookCategories.slice(0, 8).map((category) => (
+            <CategoryChip
+              key={category}
+              label={category}
+              active={activeCategory === category}
+              onClick={() => setActiveCategory(category)}
+            />
+          ))}
+        </div>
+        
         {isLoading ? (
           <div className="space-y-12">
-            {[...Array(2)].map((_, index) => (
+            {[...Array(5)].map((_, index) => (
               <div key={index} className="space-y-4">
                 <div className="h-8 w-48 bg-muted rounded animate-pulse"></div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
@@ -114,7 +174,7 @@ export function BooksByCategory() {
                     )}
                     style={{ animationDelay: `${200 + categoryIndex * 100}ms` }}
                   >
-                    <Link to="/books">
+                    <Link to={`/books?category=${encodeURIComponent(category.categoryName)}`}>
                       View All
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>

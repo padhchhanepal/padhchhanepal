@@ -1,4 +1,3 @@
-
 import { BookData } from "@/components/ui/book-card";
 
 export const mockBooks: BookData[] = [
@@ -114,6 +113,105 @@ export const mockBooks: BookData[] = [
     location: "Patan",
     sellerContact: "literary@example.com",
     description: "Rare collection of poems by Nepal's greatest poet. Some minor wear on cover."
+  },
+  // Adding more books with different categories
+  {
+    id: "9",
+    title: "Himalayan Dreams",
+    author: "Maya Thapa",
+    cover: "https://images.unsplash.com/photo-1495640452828-3df6795cf69b",
+    price: 290,
+    originalPrice: 350,
+    language: "english",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "A biography of the first Nepali woman to climb Mount Everest."
+  },
+  {
+    id: "10",
+    title: "The Lost Kingdom",
+    author: "Rajan Kattel",
+    cover: "https://images.unsplash.com/photo-1535398089889-dd807df1dfaa",
+    price: 320,
+    originalPrice: 380,
+    language: "english",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Historical fiction about ancient Nepal."
+  },
+  {
+    id: "11",
+    title: "My Life Journey",
+    author: "Prabin Gurung",
+    cover: "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+    price: 410,
+    originalPrice: 450,
+    language: "nepali",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Autobiography of a renowned Nepali entrepreneur."
+  },
+  {
+    id: "12",
+    title: "Love in Kathmandu",
+    author: "Sunita Rai",
+    cover: "https://images.unsplash.com/photo-1474366521946-c3d4b507abf2",
+    price: 280,
+    originalPrice: 330,
+    language: "english",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "A love story set against the backdrop of bustling Kathmandu."
+  },
+  {
+    id: "13",
+    title: "Meditations on the Himalayas",
+    author: "Tenzin Lama",
+    cover: "https://images.unsplash.com/photo-1571425046056-2d768bcd9192",
+    price: 325,
+    originalPrice: 370,
+    language: "english",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Spiritual reflections from a Buddhist monk."
+  },
+  {
+    id: "14",
+    title: "Collected Essays on Nepali Culture",
+    author: "Dipak Sharma",
+    cover: "https://images.unsplash.com/photo-1532012197267-da84d127e765",
+    price: 390,
+    originalPrice: 430,
+    language: "english",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "A compilation of essays examining various aspects of Nepali culture."
+  },
+  {
+    id: "15",
+    title: "The Village Tales",
+    author: "Krishna Magar",
+    cover: "https://images.unsplash.com/photo-1516041541579-76c595d1d05f",
+    price: 255,
+    originalPrice: 300,
+    language: "nepali",
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Short stories from rural Nepal that capture the essence of village life."
   }
 ];
 
