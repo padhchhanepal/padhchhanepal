@@ -10,6 +10,8 @@ import BookDetail from "./pages/BookDetail";
 import UserAccount from "./pages/UserAccount";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import Poetry from "./pages/Poetry";
+import PoetrySessionDetail from "./pages/PoetrySessionDetail";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +23,10 @@ const preloadImages = () => {
     "https://images.unsplash.com/photo-1543002588-bfa74002ed7e",
     "https://images.unsplash.com/photo-1541963463532-d68292c34b19",
     "https://images.unsplash.com/photo-1478720568477-152d9b164e26",
-    "https://images.unsplash.com/photo-1476275466078-4007374efbbe"
+    "https://images.unsplash.com/photo-1476275466078-4007374efbbe",
+    "https://images.unsplash.com/photo-1503614472-8c93d56e92ce",
+    "https://images.unsplash.com/photo-1543310465-f4d3ca5a2a25",
+    "https://images.unsplash.com/photo-1560111137-78deaf6a0b6b"
   ];
   
   images.forEach(src => {
@@ -47,6 +52,8 @@ const App = () => {
             <Route path="/account" element={<UserAccount />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/secondhand" element={<Admin />} /> {/* Temporary route, will create a dedicated page later */}
+            <Route path="/poetry" element={<Poetry />} />
+            <Route path="/poetry/:id" element={<PoetrySessionDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
