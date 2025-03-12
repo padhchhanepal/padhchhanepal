@@ -12,6 +12,10 @@ export interface BookData {
   originalPrice: number;
   language: "english" | "nepali";
   isNew: boolean;
+  condition?: "like-new" | "good" | "fair" | "poor" | "new";
+  location?: string;
+  sellerContact?: string;
+  description?: string;
 }
 
 interface BookCardProps {

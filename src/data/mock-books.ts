@@ -10,7 +10,11 @@ export const mockBooks: BookData[] = [
     price: 340,
     originalPrice: 400,
     language: "english",
-    isNew: true
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "A beautiful story about summer adventures."
   },
   {
     id: "2",
@@ -20,7 +24,11 @@ export const mockBooks: BookData[] = [
     price: 425,
     originalPrice: 500,
     language: "nepali",
-    isNew: true
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Award-winning Nepali novel about rural life."
   },
   {
     id: "3",
@@ -30,7 +38,11 @@ export const mockBooks: BookData[] = [
     price: 280,
     originalPrice: 280,
     language: "english",
-    isNew: false
+    isNew: false,
+    condition: "good",
+    location: "Kathmandu",
+    sellerContact: "sharma@example.com",
+    description: "A well-maintained secondhand book about mountain journeys."
   },
   {
     id: "4",
@@ -40,7 +52,11 @@ export const mockBooks: BookData[] = [
     price: 380,
     originalPrice: 450,
     language: "nepali",
-    isNew: true
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "A modern classic of Nepali literature."
   },
   {
     id: "5",
@@ -50,7 +66,11 @@ export const mockBooks: BookData[] = [
     price: 560,
     originalPrice: 560,
     language: "english",
-    isNew: true
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Comprehensive history of Nepal from ancient times to present."
   },
   {
     id: "6",
@@ -60,7 +80,11 @@ export const mockBooks: BookData[] = [
     price: 340,
     originalPrice: 400,
     language: "nepali",
-    isNew: true
+    isNew: true,
+    condition: "new",
+    location: "",
+    sellerContact: "",
+    description: "Award-winning Nepali novel about social issues."
   },
   // Adding some secondhand books for testing
   {
@@ -71,7 +95,11 @@ export const mockBooks: BookData[] = [
     price: 200,
     originalPrice: 350,
     language: "nepali",
-    isNew: false
+    isNew: false,
+    condition: "fair",
+    location: "Pokhara",
+    sellerContact: "mohan@example.com",
+    description: "A classic Nepali novel with some visible wear but all pages intact."
   },
   {
     id: "8",
@@ -81,7 +109,11 @@ export const mockBooks: BookData[] = [
     price: 175,
     originalPrice: 250,
     language: "nepali",
-    isNew: false
+    isNew: false,
+    condition: "good",
+    location: "Patan",
+    sellerContact: "literary@example.com",
+    description: "Rare collection of poems by Nepal's greatest poet. Some minor wear on cover."
   }
 ];
 
@@ -105,4 +137,11 @@ export const deleteBook = (id: string): void => {
   if (index !== -1) {
     mockBooks.splice(index, 1);
   }
+};
+
+export const getMostLovedBooks = (): BookData[] => {
+  // Simulate a list of most loved books (in a real app, this would be based on user ratings/likes)
+  return [...mockBooks]
+    .sort(() => Math.random() - 0.5) // Random sorting for demonstration
+    .slice(0, 6); // Return top 6 books
 };

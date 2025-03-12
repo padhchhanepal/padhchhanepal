@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/home/hero-section";
 import { Bestsellers } from "@/components/home/bestsellers";
 import { FeaturedReviews } from "@/components/home/featured-reviews";
+import { MostLovedBooks } from "@/components/home/most-loved-books";
 
 const Index = () => {
   // Scroll to top when component mounts
@@ -18,6 +19,7 @@ const Index = () => {
       <main className="flex-grow">
         <HeroSection />
         <Bestsellers />
+        <MostLovedBooks />
         <FeaturedReviews />
       </main>
       <Footer />
