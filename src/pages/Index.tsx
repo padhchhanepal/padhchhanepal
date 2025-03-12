@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/home/hero-section";
 import { Bestsellers } from "@/components/home/bestsellers";
 import { FeaturedReviews } from "@/components/home/featured-reviews";
-import { MostLovedBooks } from "@/components/home/most-loved-books";
+import { BooksByCategory } from "@/components/home/books-by-category";
 import { PoetrySessions } from "@/components/home/poetry-sessions";
 
 function Index() {
@@ -31,7 +31,7 @@ function Index() {
         <main className="flex-1">
           <HeroSection />
           <Bestsellers />
-          <MostLovedBooks />
+          <BooksByCategory />
           <PoetrySessions />
           <FeaturedReviews />
         </main>
