@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Book, MapPin, Edit, Trash2, Tag, MessageSquare, AlertCircle } from "lucide-react";
+import { Book, MapPin, Edit, Trash2, Tag, MessageSquare, AlertCircle, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookData } from "@/components/ui/book-card";
 import { deleteBook, mockBooks } from "@/data/mock-books";
