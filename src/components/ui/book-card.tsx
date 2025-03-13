@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Heart } from "lucide-react";
@@ -22,9 +23,10 @@ interface BookCardProps {
   book: BookData;
   className?: string;
   featured?: boolean;
+  compact?: boolean;
 }
 
-export function BookCard({ book, className, featured = false }: BookCardProps) {
+export function BookCard({ book, className, featured = false, compact = false }: BookCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -44,6 +46,7 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
         "border border-border hover:border-book-primary/50",
         "bg-white dark:bg-black/20 backdrop-blur-sm shadow-sm hover:shadow-lg",
         featured ? "md:flex md:items-center md:p-4 md:gap-6" : "flex flex-col",
+        compact ? "h-full" : "",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -53,8 +56,9 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
       {discountPercent > 0 && (
         <div
           className={cn(
-            "absolute top-3 left-3 z-10 px-2 py-1 rounded-full text-xs font-bold text-white",
+            "absolute top-2 left-2 z-10 px-1.5 py-0.5 rounded-full text-xs font-bold text-white",
             "animate-fade-in shadow-sm",
+            compact ? "text-[10px]" : "text-xs",
             discountBadgeColor
           )}
         >
@@ -66,12 +70,15 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
       <div
         className={cn(
           "overflow-hidden bg-book-secondary/30",
-          featured ? "md:w-1/3 aspect-[3/4]" : "w-full aspect-[2/3] max-h-[300px]"
+          featured ? "md:w-1/3 aspect-[3/4]" : compact ? "w-full aspect-[2/3] max-h-[180px]" : "w-full aspect-[2/3] max-h-[300px]"
         )}
       >
         {!imageLoaded && (
           <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-            <div className="w-10 h-10 rounded-full border-2 border-book-primary/50 border-t-transparent animate-spin" />
+            <div className={cn(
+              "rounded-full border-2 border-book-primary/50 border-t-transparent animate-spin",
+              compact ? "w-6 h-6" : "w-10 h-10"
+            )} />
           </div>
         )}
         <img
@@ -89,7 +96,8 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
       {/* Content */}
       <div
         className={cn(
-          "p-4 flex flex-col flex-grow",
+          "flex flex-col flex-grow",
+          compact ? "p-2" : "p-4",
           featured && "md:w-2/3"
         )}
       >
@@ -100,31 +108,45 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
           <h3
             className={cn(
               "font-display font-semibold leading-tight mb-1 transition-all duration-300",
-              featured ? "text-xl md:text-2xl" : "text-lg"
+              featured ? "text-xl md:text-2xl" : compact ? "text-sm" : "text-lg",
+              compact && "line-clamp-1"
             )}
           >
             {book.title}
           </h3>
         </Link>
-        <p className="text-muted-foreground text-sm mb-2">{book.author}</p>
+        <p className={cn(
+          "text-muted-foreground mb-2",
+          compact ? "text-xs" : "text-sm",
+          compact && "line-clamp-1"
+        )}>
+          {book.author}
+        </p>
 
         {/* Language Badge */}
         <div
           className={cn(
-            "text-xs font-medium px-2 py-0.5 rounded-full w-fit mb-2",
+            "font-medium px-2 py-0.5 rounded-full w-fit mb-2",
             book.language === "english"
               ? "bg-book-english/10 text-book-english"
-              : "bg-book-nepali/10 text-book-nepali"
+              : "bg-book-nepali/10 text-book-nepali",
+            compact ? "text-[10px] px-1.5 py-0.5" : "text-xs"
           )}
         >
           {book.language === "english" ? "English" : "Nepali"}
         </div>
 
         <div className="mt-auto flex items-end justify-between pt-2">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-lg">₹{book.price}</span>
+          <div className="flex items-center gap-1">
+            <span className={cn(
+              "font-bold",
+              compact ? "text-sm" : "text-lg"
+            )}>₹{book.price}</span>
             {book.originalPrice > book.price && (
-              <span className="text-muted-foreground line-through text-sm">
+              <span className={cn(
+                "text-muted-foreground line-through",
+                compact ? "text-xs" : "text-sm"
+              )}>
                 ₹{book.originalPrice}
               </span>
             )}
@@ -134,7 +156,8 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
           <button
             onClick={() => setIsWishlisted(!isWishlisted)}
             className={cn(
-              "p-2 rounded-full transition-all duration-300",
+              "rounded-full transition-all duration-300",
+              compact ? "p-1.5" : "p-2",
               isWishlisted
                 ? "bg-book-primary/10 text-book-primary"
                 : "bg-transparent text-muted-foreground hover:bg-book-primary/5 hover:text-book-primary"
@@ -142,7 +165,8 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
           >
             <Heart
               className={cn(
-                "h-5 w-5 transition-all duration-300",
+                "transition-all duration-300",
+                compact ? "h-4 w-4" : "h-5 w-5",
                 isWishlisted && "fill-book-primary"
               )}
             />
@@ -159,18 +183,20 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
       />
 
       {/* Quick view button */}
-      <Link
-        to={`/book/${book.id}`}
-        className={cn(
-          "absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full",
-          "bg-book-primary text-white font-medium text-sm",
-          "transform transition-all duration-500 shadow-lg",
-          "hover:bg-book-primary/90 active:scale-95",
-          isHovered ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        )}
-      >
-        View Details
-      </Link>
+      {!compact && (
+        <Link
+          to={`/book/${book.id}`}
+          className={cn(
+            "absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full",
+            "bg-book-primary text-white font-medium text-sm",
+            "transform transition-all duration-500 shadow-lg",
+            "hover:bg-book-primary/90 active:scale-95",
+            isHovered ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          )}
+        >
+          View Details
+        </Link>
+      )}
     </div>
   );
 }

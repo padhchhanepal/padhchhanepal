@@ -27,15 +27,15 @@ export function MostLovedBooks() {
         </div>
         
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
             {[...Array(6)].map((_, index) => (
-              <div key={index} className="h-96 rounded-lg bg-muted animate-pulse"></div>
+              <div key={index} className="h-64 rounded-lg bg-muted animate-pulse"></div>
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
             {books.map((book) => (
-              <BookCard key={book.id} book={book} />
+              <BookCard key={book.id} book={book} compact />
             ))}
           </div>
         )}

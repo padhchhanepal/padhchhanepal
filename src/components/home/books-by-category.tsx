@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { BookCard, BookData } from "@/components/ui/book-card";
@@ -19,7 +18,6 @@ export function BooksByCategory() {
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Define all available categories
   const bookCategories = [
     "All",
     "Biography",
@@ -55,11 +53,8 @@ export function BooksByCategory() {
   }, []);
 
   useEffect(() => {
-    // Simulate API call to get books by category
     setIsLoading(true);
     setTimeout(() => {
-      // For demonstration, we'll assign random categories to the mock books
-      // In a real app, you would fetch properly categorized books from an API
       const categorizedBooks: Record<string, BookData[]> = {
         "Biography": [],
         "Autobiography": [],
@@ -76,26 +71,23 @@ export function BooksByCategory() {
         "Spiritual": []
       };
       
-      // Assign books to categories (a book can be in multiple categories)
       mockBooks.forEach(book => {
-        // Randomly assign each book to 1-3 categories for demo purposes
         const assignedCategories = Object.keys(categorizedBooks)
           .sort(() => 0.5 - Math.random())
           .slice(0, Math.floor(Math.random() * 3) + 1);
         
         assignedCategories.forEach(category => {
-          if (categorizedBooks[category].length < 5) { // Limit to 5 books per category
+          if (categorizedBooks[category].length < 5) {
             categorizedBooks[category].push({...book});
           }
         });
       });
       
-      // Convert to array format for state
       const categoriesArray = Object.entries(categorizedBooks)
-        .filter(([_, books]) => books.length > 0) // Only include categories with books
+        .filter(([_, books]) => books.length > 0)
         .map(([categoryName, books]) => ({
           categoryName,
-          books: books.slice(0, 5) // Ensure max 5 books per category
+          books: books.slice(0, 5)
         }));
       
       setCategories(categoriesArray);
@@ -129,7 +121,6 @@ export function BooksByCategory() {
           </p>
         </div>
         
-        {/* Category filter chips */}
         <div 
           className={cn(
             "flex flex-wrap gap-2 mb-8",
@@ -152,9 +143,9 @@ export function BooksByCategory() {
             {[...Array(5)].map((_, index) => (
               <div key={index} className="space-y-4">
                 <div className="h-8 w-48 bg-muted rounded animate-pulse"></div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                  {[...Array(5)].map((_, bookIndex) => (
-                    <div key={bookIndex} className="h-96 rounded-lg bg-muted animate-pulse"></div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+                  {[...Array(6)].map((_, bookIndex) => (
+                    <div key={bookIndex} className="h-64 rounded-lg bg-muted animate-pulse"></div>
                   ))}
                 </div>
               </div>
@@ -191,7 +182,7 @@ export function BooksByCategory() {
                   </Button>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
                   {category.books.map((book, index) => (
                     <div
                       key={book.id}
@@ -200,7 +191,7 @@ export function BooksByCategory() {
                       )}
                       style={{ animationDelay: `${300 + categoryIndex * 100 + index * 100}ms` }}
                     >
-                      <BookCard book={book} />
+                      <BookCard book={book} compact />
                     </div>
                   ))}
                 </div>
