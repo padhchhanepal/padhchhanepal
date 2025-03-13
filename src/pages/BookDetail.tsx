@@ -1,14 +1,13 @@
+
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { BookOpen, ShoppingCart, CreditCard, ArrowLeft, Clock, MapPin, Heart } from "lucide-react";
+import { BookOpen, ShoppingCart, CreditCard, ArrowLeft, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { BookData } from "@/components/ui/book-card";
 import { mockBooks } from "@/data/mock-books";
-import { useWishlist } from "@/hooks/use-wishlist";
-import { cn } from "@/lib/utils";
 
 const BookDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,7 +15,6 @@ const BookDetail = () => {
   const [book, setBook] = useState<BookData | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<"card" | "cod" | "wallet">("card");
   const { toast } = useToast();
-  const { isInWishlist, toggleWishlist } = useWishlist();
 
   // Fetch book data
   useEffect(() => {
@@ -81,36 +79,16 @@ const BookDetail = () => {
                 
                 {/* Book Details */}
                 <div className="space-y-6">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
-                        book.language === "english" 
-                          ? "bg-book-english/10 text-book-english" 
-                          : "bg-book-nepali/10 text-book-nepali"
-                      }`}>
-                        {book.language === "english" ? "English" : "Nepali"}
-                      </div>
-                      <h1 className="text-3xl font-bold">{book.title}</h1>
-                      <p className="text-lg text-muted-foreground">by {book.author}</p>
+                  <div>
+                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
+                      book.language === "english" 
+                        ? "bg-book-english/10 text-book-english" 
+                        : "bg-book-nepali/10 text-book-nepali"
+                    }`}>
+                      {book.language === "english" ? "English" : "Nepali"}
                     </div>
-                    
-                    <button
-                      onClick={() => book && toggleWishlist(book)}
-                      className={cn(
-                        "p-3 rounded-full transition-all duration-300",
-                        isInWishlist(book.id)
-                          ? "bg-book-primary/10 text-book-primary"
-                          : "bg-transparent text-muted-foreground hover:bg-book-primary/5 hover:text-book-primary"
-                      )}
-                      aria-label={isInWishlist(book.id) ? "Remove from wishlist" : "Add to wishlist"}
-                    >
-                      <Heart
-                        className={cn(
-                          "h-6 w-6 transition-all duration-300",
-                          isInWishlist(book.id) && "fill-book-primary"
-                        )}
-                      />
-                    </button>
+                    <h1 className="text-3xl font-bold">{book.title}</h1>
+                    <p className="text-lg text-muted-foreground">by {book.author}</p>
                   </div>
                   
                   <div className="flex items-center gap-2">

@@ -1,9 +1,7 @@
-
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useWishlist } from "@/hooks/use-wishlist";
 
 export interface BookData {
   id: string;
@@ -28,10 +26,8 @@ interface BookCardProps {
 
 export function BookCard({ book, className, featured = false }: BookCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const { isInWishlist, toggleWishlist } = useWishlist();
-  
-  const isWishlisted = isInWishlist(book.id);
 
   const discountPercent = Math.round(
     ((book.originalPrice - book.price) / book.originalPrice) * 100
@@ -136,17 +132,13 @@ export function BookCard({ book, className, featured = false }: BookCardProps) {
 
           {/* Wishlist button */}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              toggleWishlist(book);
-            }}
+            onClick={() => setIsWishlisted(!isWishlisted)}
             className={cn(
               "p-2 rounded-full transition-all duration-300",
               isWishlisted
                 ? "bg-book-primary/10 text-book-primary"
                 : "bg-transparent text-muted-foreground hover:bg-book-primary/5 hover:text-book-primary"
             )}
-            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
           >
             <Heart
               className={cn(
