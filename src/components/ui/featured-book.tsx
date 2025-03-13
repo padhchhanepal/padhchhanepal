@@ -4,7 +4,8 @@ import { BookData } from "./book-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, Heart } from "lucide-react";
+import { useWishlist } from "@/hooks/use-wishlist";
 
 interface FeaturedBookProps {
   book: BookData;
@@ -14,6 +15,7 @@ interface FeaturedBookProps {
 export function FeaturedBook({ book, className }: FeaturedBookProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { isInWishlist, toggleWishlist } = useWishlist();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -130,10 +132,18 @@ export function FeaturedBook({ book, className }: FeaturedBookProps) {
             </Link>
           </Button>
           
-          <Button asChild variant="outline" className="rounded-full border-book-primary/20 text-book-primary hover:bg-book-primary/5 transition-all duration-300">
-            <Link to={`/book/${book.id}`}>
-              View Details
-            </Link>
+          <Button 
+            variant="outline" 
+            className="rounded-full border-book-primary/20 text-book-primary hover:bg-book-primary/5 transition-all duration-300"
+            onClick={() => toggleWishlist(book)}
+          >
+            <Heart 
+              className={cn(
+                "w-4 h-4 mr-2", 
+                isInWishlist(book.id) && "fill-book-primary"
+              )} 
+            />
+            {isInWishlist(book.id) ? "Wishlisted" : "Add to Wishlist"}
           </Button>
         </div>
       </div>
