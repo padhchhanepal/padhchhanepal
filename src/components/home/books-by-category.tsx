@@ -62,10 +62,18 @@ export function BooksByCategory() {
       // In a real app, you would fetch properly categorized books from an API
       const categorizedBooks: Record<string, BookData[]> = {
         "Biography": [],
+        "Autobiography": [],
         "Fiction": [],
         "Non-Fiction": [],
         "Love Story": [],
-        "Story": []
+        "Story": [],
+        "History": [],
+        "Religious": [],
+        "Poetry": [],
+        "Essays": [],
+        "Drama": [],
+        "Philosophy": [],
+        "Spiritual": []
       };
       
       // Assign books to categories (a book can be in multiple categories)
@@ -83,10 +91,12 @@ export function BooksByCategory() {
       });
       
       // Convert to array format for state
-      const categoriesArray = Object.entries(categorizedBooks).map(([categoryName, books]) => ({
-        categoryName,
-        books: books.slice(0, 5) // Ensure max 5 books per category
-      }));
+      const categoriesArray = Object.entries(categorizedBooks)
+        .filter(([_, books]) => books.length > 0) // Only include categories with books
+        .map(([categoryName, books]) => ({
+          categoryName,
+          books: books.slice(0, 5) // Ensure max 5 books per category
+        }));
       
       setCategories(categoriesArray);
       setIsLoading(false);
@@ -127,7 +137,7 @@ export function BooksByCategory() {
           )}
           style={{ animationDelay: "150ms" }}
         >
-          {bookCategories.slice(0, 8).map((category) => (
+          {bookCategories.map((category) => (
             <CategoryChip
               key={category}
               label={category}
