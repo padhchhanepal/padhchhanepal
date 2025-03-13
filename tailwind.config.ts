@@ -26,7 +26,7 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#ea384c', // Changed to red
+					DEFAULT: '#0077FF', // Changed to blue
 					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
@@ -64,11 +64,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				book: {
-					primary: '#ea384c', // Changed to red
-					secondary: '#ffeaeb', // Light red background
+					primary: '#0077FF', // Changed to blue
+					secondary: '#E6F0FF', // Light blue background
 					nepali: '#F97316',
 					english: '#0EA5E9',
-					used: '#000000', // Changed to black
+					used: '#000000', // Black
 					accent: '#F2FCE2',
 				}
 			},
